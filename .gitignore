@@ -1,9 +1,6 @@
 .env
 .firebase/
 .firebaserc
-.github/
-.github/workflows
-.github/workflows/firebase-hosting-pull-request.yml
 
 # dependencies
 /node_modules
