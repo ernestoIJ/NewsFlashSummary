@@ -1,4 +1,6 @@
 .env
+.firebase/
+.firebaserc
 
 # dependencies
 /node_modules
