@@ -57,11 +57,11 @@ function UrlInput() {
    return (
       <div className="container">
          <h1>NewsFlashSummarizer</h1>
-         <p>Paste in the article URL below</p>
+         <p>Paste in the article URL or Text below</p>
          <form onSubmit={handleSubmit}>
             <input 
                type="text" 
-               placeholder="Enter URL here" 
+               placeholder="Enter URL or Text here" 
                value={url} 
                onChange={handleInputChange} 
             />
