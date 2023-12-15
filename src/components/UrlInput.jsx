@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { summarizeText } from "../services/articleSummarizer"; 
+import { summarizeArticle } from "../services/articleSummarizer"; 
 
 function UrlInput() {
 
@@ -17,15 +17,14 @@ function UrlInput() {
       event.preventDefault();
       setIsLoading(true);
 
-      const maxLength = 130;
-      const minLength = 30;
-
-      summarizeText(url, maxLength, minLength).then(result => {
-            const summaryText = result[0].summary_text;
-            setSummary(summaryText || "Summary not available.");
+      summarizeArticle(url).then(res => {
+            const summaryText = res.summary || "Summary not available.";
+            // console.log(result);
+            setSummary(summaryText);
             setIsLoading(false);
          })
          .catch(error => {
+            console.error("Error:", error);
             setSummary("Failed to load the summary.");
             setIsLoading(false);
          });
@@ -56,12 +55,12 @@ function UrlInput() {
 
    return (
       <div className="container">
-         <h1>NewsFlashSummarizer</h1>
-         <p>Paste in the article URL or Text below</p>
+         <h1>Article Summarizer</h1>
+         <p>Paste in the article URL below</p>
          <form onSubmit={handleSubmit}>
             <input 
                type="text" 
-               placeholder="Enter URL or Text here" 
+               placeholder="Enter URL here" 
                value={url} 
                onChange={handleInputChange} 
             />

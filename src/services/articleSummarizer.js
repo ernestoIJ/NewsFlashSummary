@@ -1,21 +1,24 @@
-const apiURL = 'https://api-inference.huggingface.co/models/facebook/bart-large-cnn';
-const apiKey = process.env.REACT_APP_API_KEY; // Replace with your actual API key
+import axios from "axios";
 
-export const headers = {
-    'Authorization': `Bearer ${apiKey}`
+export async function summarizeArticle(url) {
+    const options = {
+  method: 'GET',
+  url: 'https://article-extractor-and-summarizer.p.rapidapi.com/summarize',
+  params: {
+    url: url,
+    length: '2',
+  },
+  headers: {
+    'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
+    'X-RapidAPI-Host': 'article-extractor-and-summarizer.p.rapidapi.com'
+  }
 };
 
-export const summarizeText = (text, maxLength, minLength) => {
-    return fetch(apiURL, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify({ 
-         inputs: text,
-         parameters: {
-            max_length: maxLength,
-            min_length: minLength
-         }
-      })
-    })
-    .then(response => response.json());
-};
+try {
+	const response = await axios.request(options);
+	return response.data;
+    // console.log(response.data);
+} catch (error) {
+	console.error(error);
+}
+}
